@@ -1,46 +1,8 @@
-import React,{useState} from "react";
-import { Formik, useFormik } from "formik";
-import { SignupSchema } from "../../schemas";
-import Style from "../Registration/Registration.module.css";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import Style from '../RegistrationAlert/RegistrationAlert.module.css'
 
-
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: "",
-  inlineRadioOptions: "",
-  qualification: "",
-  password: "",
-  
-};
-const Registration = () => {
-
-  
-  const navigate = useNavigate();
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-    handleReset,
-
-    handleInputBlur,
+const RegistrationAlert = () => {
    
-  } = useFormik({
-    initialValues: initialValues,
-    validationSchema: SignupSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      alert("Data saved successfully");
-      resetForm();
-      navigate("/submitted", { state: { formData: values } });
-    },
-  });
-  console.log(navigate);
-  
-
   return (
     <>
       <section className=" gradient-custom">
@@ -48,13 +10,13 @@ const Registration = () => {
           <div className="row justify-content-center align-items-center ">
             <div className="col-12 col-lg-9 ">
             <h3 className="text-center mt-5">Registration Form  </h3>
-            <p className="text-center">(with inline validation)</p>
+            <p className="text-center">(with alert validation)</p>
               <div
                 className={`card  card-registration ${Style.cardbg}`}
                 style={{ borderRadius: "15px" }}
               >
                 <div className="card-body p-2 p-md-3">
-                  <form onSubmit={handleSubmit}>
+                  <form >
                     <div className="row">
                       <div className="col-md-6 mb-2">
                         <div className="form-outline">
@@ -65,14 +27,8 @@ const Registration = () => {
                             type="text"
                             id="firstName"
                             className={`form-control form-control-lg ${Style.inputtext}`}
-                            name="firstName"
-                            value={values.firstName}
-                            onChange={handleChange}
-                            onBlur={handleInputBlur}
+                            name="firstName" 
                           />
-                      {/* {alert(<p >{errors.firstName}</p>)} */}
-                  console.log(errors.firstName)
-                          {/* {<p className={Style.error}>{errors.firstName}</p>} */}
                         </div>
                       </div>
                       <div className="col-md-6">
@@ -84,12 +40,9 @@ const Registration = () => {
                             type="text"
                             id="lastName"
                             name="lastName"
-                            value={values.lastName}
-                            onChange={handleChange}
-                            onBlur={handleInputBlur}
+                           
                             className={`form-control form-control-lg ${Style.inputtext}`}
                           />
-                          {<p className={Style.error}>{errors.lastName}</p>}
                         </div>
                       </div>
                     </div>
@@ -103,11 +56,10 @@ const Registration = () => {
                             type="email"
                             id="email"
                             name="email"
-                            value={values.email}
-                            onChange={handleChange}
+                           
                             className={`form-control form-control-lg ${Style.inputtext}`}
                           />
-                          {<p className={Style.error}>{errors.email}</p>}
+                          
                         </div>
                       </div>
                       <div className="col-md-6 ">
@@ -119,11 +71,10 @@ const Registration = () => {
                             type="tel"
                             id="phoneNumber"
                             name="phoneNumber"
-                            value={values.phoneNumber}
-                            onChange={handleChange}
+                            
                             className={`form-control form-control-lg ${Style.inputtext}`}
                           />
-                          {<p className={Style.error}>{errors.phoneNumber}</p>}
+                        
                         </div>
                       </div>
                     </div>
@@ -145,8 +96,7 @@ const Registration = () => {
                               type="checkbox"
                               name="qualification"
                               value="Masters"
-                              onChange={handleChange}
-                              checked={values.qualification.includes("Masters")}
+                              
                             />
                           </div>
                           <div className="form-check form-check-inline">
@@ -161,8 +111,7 @@ const Registration = () => {
                               type="checkbox"
                               name="qualification"
                               value="Bachelor"
-                              onChange={handleChange}
-                              checked={values.qualification.includes("Bachelor")}
+                           
                             />
                           </div>
                           <div className="form-check form-check-inline">
@@ -177,8 +126,7 @@ const Registration = () => {
                               type="checkbox"
                               name="qualification"
                               value="10th"
-                              onChange={handleChange}
-                              checked={values.qualification.includes("12th")}
+                            
                             />
                           </div>
 
@@ -194,11 +142,8 @@ const Registration = () => {
                               type="checkbox"
                               name="qualification"
                               value="10th"
-                              onChange={handleChange}
-                              checked={values.qualification.includes("10th")}
                             />
                           </div>
-                          {<p className={Style.error2}>{errors.qualification}</p>}
                         </div>
                         <div className="col-md-6 mb-1">
                           <h6 className={`form-label ${Style.label2}`}>Gender: </h6>
@@ -216,8 +161,7 @@ const Registration = () => {
                               name="inlineRadioOptions"
                               id="inlineRadioOptions"
                               value="female"
-                              onChange={handleChange}
-                              checked={values.inlineRadioOptions === "female"}
+                             
                             />
                           </div>
                           <div className="form-check form-check-inline">
@@ -233,8 +177,7 @@ const Registration = () => {
                               name="inlineRadioOptions"
                               id="maleGender"
                               value="male"
-                              onChange={handleChange}
-                              checked={values.inlineRadioOptions === "male"}
+                             
                             />
                           </div>
 
@@ -251,11 +194,10 @@ const Registration = () => {
                               name="inlineRadioOptions"
                               id="otherGender"
                               value="other"
-                              onChange={handleChange}
-                              checked={values.inlineRadioOptions === "other"}
+                           
                             />
                           </div>
-                          {<p className={Style.error2}>{errors.inlineRadioOptions} </p>}
+                         
                         </div>
                       </div>
                    
@@ -266,7 +208,7 @@ const Registration = () => {
                               Country
                             </label>
                     </div> 
-                            <select className={`select mx-2 ${Style.selectValue}`} name="country" onChange={handleChange}>
+                            <select className={`select mx-2 ${Style.selectValue}`} name="country" >
                               <option value="">Choose Your country</option>
                               <option value="India">India</option>
                             <option value="China">China</option>
@@ -274,7 +216,7 @@ const Registration = () => {
                             <option value="Japan">Japan</option>
                             <option value="Canada">Canada</option>
                             </select>
-                            {<p className={Style.error}>{errors.country}</p>}
+                         
                           </div>
                      
                      
@@ -287,14 +229,14 @@ const Registration = () => {
                           </div>
                            
                            
-                            <select className={`select mx-2 ${Style.selectValue}`} name="state" onChange={handleChange}>
+                            <select className={`select mx-2 ${Style.selectValue}`} name="state" >
                               <option value="">Choose Your State</option>
                               <option value="Haryana">Haryana</option>
                               <option value="Punjab">Punjab</option>
                               <option value="Goa">Goa</option>
                               <option value="Bihar">Bihar</option>
                             </select>
-                           { <p className={Style.error}>{errors.state}</p>}
+                        
                           </div>
                           <div className="col-md-4 mb-1">
                           <div>
@@ -304,14 +246,14 @@ const Registration = () => {
                           </div>
                             
                            
-                            <select className={`select mx-2 ${Style.selectValue}`} name="city" onChange={handleChange}>
+                            <select className={`select mx-2 ${Style.selectValue}`} name="city" >
                               <option value="">Choose Your City</option>
                               <option value="Fatehabad">Fatehabad</option>
                               <option value="Hisar">Hisar</option>
                               <option value="Jind">Jind</option>
                               <option value="Bhattu">Bhattu</option>
                             </select>
-                            {<p className={Style.error}>{errors.city}</p>}
+                           
                           </div>
                       </div>
                     
@@ -326,11 +268,10 @@ const Registration = () => {
                             type="password"
                             id="password"
                             name="password"
-                            value={values.password}
-                            onChange={handleChange}
+                            
                             className={`form-control form-control-lg ${Style.inputtext}`}
                           />
-                          {<p className={Style.error}>{errors.password}</p>}
+                       
                         </div>
                       </div>
                       <div className="col-md-6 mt-2">
@@ -342,11 +283,10 @@ const Registration = () => {
                             type="password"
                             id="confirm_password"
                             name="confirm_password"
-                            value={values.confirm_password}
-                            onChange={handleChange}
+                            
                             className={`form-control form-control-lg ${Style.inputtext}`}
                           />
-                          {<p className={Style.error}>{errors.confirm_password}</p>}
+                         
                         </div>
                       </div>
                     </div>
@@ -354,7 +294,7 @@ const Registration = () => {
                       <button
                         type="button"
                         className="btn btn-dark btn-lg"
-                        onClick={handleReset}
+                       
                       >
                         Reset
                       </button>
@@ -373,7 +313,7 @@ const Registration = () => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Registration;
+export default RegistrationAlert
