@@ -1,0 +1,48 @@
+
+[
+  
+  {
+    "id": 1,
+    "firstName": "Ankush",
+    "lastName": "Panwar",
+    "email": "panwarankush07@gmail.com",
+    "phoneNumber": "9728733043",
+    "password": "Ankush@3343"
+  },
+  {
+    "id": 2,
+    "firstName": "Pankaj",
+    "lastName": "Panwar",
+    "email": "panwar07@gmail.com",
+    "phoneNumber": "9728733043",
+    "password": "Pankaj@3343"
+
+  },
+  {
+    "id": 3,
+    "firstName": "Rahul",
+    "lastName": "Panwar",
+    "email": "rahul07@gmail.com",
+    "phoneNumber": "9728733043",
+    "password": "Rahul@3343"
+
+  },
+  {
+    "id": 4,
+    "firstName": "Suraj",
+    "lastName": "Adiwal",
+    "email": "suraj7@gmail.com",
+    "phoneNumber": "9728733043",
+    "password": "Suraj@3343"
+
+  },
+  {
+    "id": 5,
+    "firstName": "Dinesh",
+    "lastName": "Panwar",
+    "email": "dinesh7@gmail.com",
+    "phoneNumber": "9728733043",
+    "password": "Dinesh@3343"
+  }
+ 
+]

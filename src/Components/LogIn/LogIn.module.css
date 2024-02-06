@@ -1,0 +1,27 @@
+.formbg{
+    background-color: rgb(250, 248, 248);
+    height: 500px;
+}
+.imglog{
+    width: 100%;
+    height: 498px;
+}
+.logo{
+    margin-top: -20px;
+    margin-left: -15px;
+}
+.error{
+    color: red;
+    margin-top: -20px;
+}
+.log{
+    margin-top: 20px;
+}
+.eyeicon{
+    border: none;
+    background-color: transparent;
+    margin-left: 400px;
+    margin-top: -40px !important;
+    position: absolute;
+   
+}

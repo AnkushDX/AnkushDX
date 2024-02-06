@@ -12,18 +12,19 @@ const Header = () => {
     </button>
     <div className={`collapse navbar-collapse ${Style.navbar}`} id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link to ="/inline" className={`nav ${Style.navName}`} aria-current="page" href="#">Inline</Link>
+      <li className="nav-item">
+          <Link to ="/" className={`nav ${Style.navName}`} aria-current="page" href="#">Curd-Page</Link>
         </li>
         <li className="nav-item">
-          <Link to ="alert"className={`nav ${Style.navName}`}  aria-current="page" href="#">Alert</Link>
+          <Link to ="/registration" className={`nav ${Style.navName}`} aria-current="page" href="#">IN-LINE</Link>
         </li>
         <li className="nav-item">
-          <a className={`nav ${Style.navName}`}  aria-current="page" href="#">ABOUT</a>
+          <Link to ="/alert"className={`nav ${Style.navName}`}  aria-current="page" href="#">ALERT</Link>
         </li>
         <li className="nav-item">
-          <a className={`nav ${Style.navName}`}  aria-current="page" href="#">BOOK TABLE</a>
+          <Link to ="/login" className={`nav ${Style.navName}`}  aria-current="page" href="#">LogIn</Link>
         </li>
+       
       </ul>
     </div>
    

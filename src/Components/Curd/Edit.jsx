@@ -1,56 +1,50 @@
-import React from "react";
-import {  useFormik } from "formik";
-import { SignupSchema } from "../../schemas";
-import Style from "../Registration/Registration.module.css";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
 import Header from "../Header/Header";
-
-
-
+import { SignupSchema } from "../../schemas";
+import {  useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: "",
-  inlineRadioOptions: "",
-  qualification: "",
-  password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    inlineRadioOptions: "",
+    qualification: "",
+    password: "",
+    
+  };
+const Edit = () => {
+    const navigate = useNavigate();
+    const {
+      values,
+      errors,
+      handleChange,
+      handleSubmit,
+      handleReset,
   
-};
-const Registration = () => {
-  const navigate = useNavigate();
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-    handleReset,
-
-    handleInputBlur,
-   
-  } = useFormik({
-    initialValues: initialValues,
-    validationSchema: SignupSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      alert("Data saved successfully");
-      resetForm();
-      navigate("/inlinedata", { state: { formData: values } });
-    },
-  });
-  console.log(navigate);
-  
-
+      handleInputBlur,
+     
+    } = useFormik({
+      initialValues: initialValues,
+      validationSchema: SignupSchema,
+      onSubmit: (values, { resetForm }) => {
+        console.log(values);
+        alert("Data saved successfully");
+        resetForm();
+        navigate("/");
+      },
+    });
+    console.log(navigate);
   return (
     <>
-   <Header />
+        <Header />
       <section className=" gradient-custom">
         <div className="container py-2">
           <div className="row justify-content-center align-items-center ">
           
             <div className="col-12 col-lg-9 ">
-            <h3 className="text-center mt-5">Registration Form  </h3>
-            <p className="text-center">(with inline validation)</p>
+            <h3 className="text-center mt-5">Create Data</h3>
+          
               <div
                 className={`card  card-registration ${Style.cardbg}`}
                 style={{ borderRadius: "15px" }}
@@ -316,40 +310,7 @@ const Registration = () => {
                       </div>
                     
                         
-                    <div className="row">
-                      <div className="col-md-6 mt-2">
-                        <label className={`form-label ${Style.labelname}`} htmlFor="password">
-                          Password
-                        </label>
-                        <div className="form-outline">
-                          <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange}
-                            className={`form-control form-control-lg ${Style.inputtext}`}
-                          />
-                          {<p className={Style.error}>{errors.password}</p>}
-                        </div>
-                      </div>
-                      <div className="col-md-6 mt-2">
-                        <label className={`form-label ${Style.labelname}`} htmlFor="Confirmpassword">
-                          Confirm password
-                        </label>
-                        <div className="form-outline">
-                          <input
-                            type="password"
-                            id="confirm_password"
-                            name="confirm_password"
-                            value={values.confirm_password}
-                            onChange={handleChange}
-                            className={`form-control form-control-lg ${Style.inputtext}`}
-                          />
-                          {<p className={Style.error}>{errors.confirm_password}</p>}
-                        </div>
-                      </div>
-                    </div>
+                   
                     <div className="d-flex justify-content-center ">
                       <button
                         type="button"
@@ -358,7 +319,7 @@ const Registration = () => {
                       >
                         Reset
                       </button>
-                      <button
+                      <button to={"/"}
                         type="submit"
                         className="btn btn btn-success btn-lg ms-2"
                       >
@@ -373,7 +334,7 @@ const Registration = () => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Registration;
+export default Edit

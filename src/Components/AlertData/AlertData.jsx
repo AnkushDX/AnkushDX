@@ -1,20 +1,16 @@
 import React from 'react'
-import Style from "../RegistrationData/RegistrationData.module.css"
+import Style  from "../AlertData/AlertData.module.css"
 import { useLocation, useNavigate } from 'react-router-dom'
-
-const RegistrationData = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const formData=location.state?.formData || {}
+const AlertData = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const formData=location.state?.formData || {}
   const handleReset=()=>{
-    navigate('/registration')
+    navigate('/alert')
   }
- 
   return (
     <>
-   <div className=''>
-   <h2 className={Style.heading}>All RegistrationData</h2>
+       <h2 className={Style.heading}>Alert Registration Data</h2>
       <div>
         <strong>First Name:</strong>{formData.firstName}
       </div>
@@ -31,7 +27,7 @@ const RegistrationData = () => {
         <strong>Qulification:</strong>{formData.qualification}
       </div>
       <div>
-        <strong>Gender:</strong>{formData.inlineRadioOptions}
+        <strong>Gender:</strong>{formData.gender}
       </div>
       <div>
         <strong>Country:</strong>{formData.country}
@@ -46,10 +42,8 @@ const RegistrationData = () => {
         <strong>Password:</strong>{formData.password}
       </div>
       <button type="button" className="btn btn-success btn-lg" onClick={handleReset}>Back</button>
-   </div>
-    
     </>
   )
 }
 
-export default RegistrationData
+export default AlertData

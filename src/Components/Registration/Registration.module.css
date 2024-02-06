@@ -41,3 +41,6 @@
     width: 245px;
     border-radius: 5px;
 }
+.alert{
+    background-color: red;
+}

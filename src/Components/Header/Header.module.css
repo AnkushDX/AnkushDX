@@ -1,6 +1,7 @@
 .navsection{
     background-color: rgb(255, 188, 3);
     width: 100%;
+    z-index: 111;
 }
 .logoName{
     margin-left: 100px;
@@ -13,6 +14,9 @@
     color: black;
     margin-right: 50px;
     text-decoration: none;
+}
+.navName:hover{
+    color: white;
 }
 
 .userIcon{
