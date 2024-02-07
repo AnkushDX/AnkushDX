@@ -5,9 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import LoginData from './Logindata.json'
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
+  const navigate =useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -16,10 +17,9 @@ const LogIn = () => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmit, setSubmit] = useState(false);
-  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  // const navigate= useNavigate();
+ 
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem('credentials');
@@ -60,8 +60,10 @@ const handleRememberMeChange =()=>{
         toast.success("Login save successfully",{
           position:"top-center",
           autoClose:3000,
+        
         });
-      // navigate('/user-details',{state:user})
+        navigate('/user-details',{state:user})
+    
       }else{
         toast.error("Invalid email or password",{
           position:"top-center",
@@ -121,6 +123,12 @@ const handleRememberMeChange =()=>{
 
     return errors;
   };
+  useEffect (()=>{
+    const storedCredentials=localStorage.getItem('credentials');
+    if (!storedCredentials){
+      navigate('/login')
+    }
+  },[navigate])
   return (
     <>
       <Header />
