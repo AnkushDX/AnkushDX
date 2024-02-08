@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import LoginData from './Logindata.json'
 import { useNavigate } from "react-router-dom";
+// import Cookies from 'js-cookie';
+
 
 const LogIn = () => {
   const navigate =useNavigate();
@@ -23,23 +25,26 @@ const LogIn = () => {
 
   useEffect(() => {
     const storedCredentials = localStorage.getItem('credentials');
-    if (storedCredentials) {
+    if (!storedCredentials) {
+      navigate('/');
+    }else{
       const { email, password } = JSON.parse(storedCredentials);
       setValues({ email, password });
       setRememberMe(true);
     }
   }, []);
-
+ 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    console.log(values);
+    // console.log(values);
   };
 const handleRememberMeChange =()=>{
   setRememberMe(!rememberMe)
+ 
 }
  
 
@@ -57,36 +62,26 @@ const handleRememberMeChange =()=>{
         }else{
         localStorage.removeItem('credentials')
         }
+        // sessionStorage.setItem('user',JSON.stringify(user))
         toast.success("Login save successfully",{
           position:"top-center",
           autoClose:3000,
         
         });
         navigate('/user-details',{state:user})
-    
+    // console.log(user)
       }else{
         toast.error("Invalid email or password",{
           position:"top-center",
           autoClose:3000
         })
       }
-      // let errorMessage = "";
-      // Object.keys(errors).forEach((key) => {
-      //   errorMessage += `${errors[key]}\n`;
-      // });
+      let errorMessage = "";
+      Object.keys(errors).forEach((key) => {
+        errorMessage += `${errors[key]}\n`;
+      });
     }
-    //  else {
-    //   if(rememberMe){
-    //     localStorage.setItem('credentials',JSON.stringify(values));
-    //   }else{
-    //     localStorage.removeItem('credentials')
-    //   }
-    //     toast.success("Login save successfully",{
-    //       position: "top-center",
-    //       autoClose: 3000,
-    //     })
-
-    // }
+  
   };
 
   const validate = (values) => {
@@ -123,12 +118,7 @@ const handleRememberMeChange =()=>{
 
     return errors;
   };
-  useEffect (()=>{
-    const storedCredentials=localStorage.getItem('credentials');
-    if (!storedCredentials){
-      navigate('/login')
-    }
-  },[navigate])
+ 
   return (
     <>
       <Header />

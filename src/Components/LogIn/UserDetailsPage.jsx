@@ -5,11 +5,14 @@ const UserDetailsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-
   const user = location.state;
-
+  if(!user){
+    // navigate('/');
+    return null;
+  }
+  // console.log(user);
   const handleReset = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   return (
