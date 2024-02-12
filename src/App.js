@@ -25,7 +25,9 @@ function App() {
           <Route exact path="/alert" element={<RegistrationAlert/>}></Route>
           <Route exact path="/inlinedata" element={<RegistrationData />}></Route>
           <Route exact path="/alertdata" element={<AlertData/>}></Route>
-          <Route exact path="/user-details"  element={<Protected Component={UserDetailsPage} />}></Route>
+          <Route exact path="/user-details" element={<Protected/>}></Route>
+
+          {/* <Route exact path="/user-details"  element={<Protected Component={UserDetailsPage} />}></Route> */}
         </Routes>
       </BrowserRouter>
 

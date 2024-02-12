@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import LoginData from './Logindata.json'
 import { useNavigate } from "react-router-dom";
-// import Cookies from 'js-cookie';
+
 
 
 const LogIn = () => {
@@ -22,7 +22,6 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
  
-
   useEffect(() => {
     const storedCredentials = localStorage.getItem('credentials');
     if (!storedCredentials) {
@@ -33,6 +32,17 @@ const LogIn = () => {
       setRememberMe(true);
     }
   }, []);
+
+  // useEffect(()=>{
+  //   const storedCredentials = localStorage.getItem('credentials');
+  //   if(storedCredentials && rememberMe){
+  //     const {email,password}=JSON.parse(storedCredentials);
+  //     setValues({email,password});
+  //   }else{
+  //     localStorage.removeItem('credentials')
+  //   }
+  // },[rememberMe])
+
  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -44,10 +54,14 @@ const LogIn = () => {
   };
 const handleRememberMeChange =()=>{
   setRememberMe(!rememberMe)
- 
+  if(!rememberMe){
+    localStorage.setItem('credentials',JSON.stringify(values));
+  }else{
+    localStorage.removeItem('credentials')
+  }
+
 }
  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate(values);
@@ -57,19 +71,17 @@ const handleRememberMeChange =()=>{
     if (Object.keys(errors).length === 0) {
       const user=LoginData.find(user=>user.email === values.email && user.password === values.password)
       if (user){
-        if(rememberMe){
+        localStorage.setItem('credentials',JSON.stringify(values));
+        if(!rememberMe){
           localStorage.setItem('credentials',JSON.stringify(values));
-        }else{
-        localStorage.removeItem('credentials')
         }
-        // sessionStorage.setItem('user',JSON.stringify(user))
         toast.success("Login save successfully",{
           position:"top-center",
           autoClose:3000,
         
         });
         navigate('/user-details',{state:user})
-    // console.log(user)
+    console.log(user)
       }else{
         toast.error("Invalid email or password",{
           position:"top-center",
@@ -148,7 +160,7 @@ const handleRememberMeChange =()=>{
                             style={{ color: "#ff6219" }}
                           ></i>
                           <span className={`h2 fw-bold mb-0 ${Style.logo}`}>
-                            Logo-in
+                            Log-in
                           </span>
                         </div>
                         <div className="form-outline mb-4">

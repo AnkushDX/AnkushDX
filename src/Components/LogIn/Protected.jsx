@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserDetailsPage from "./UserDetailsPage";
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const Protected = () => {
-  const user = localStorage.getItem("credentials");
-  if (!user) {
-    window.location.href = "/";
-  }
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  // if (!user) {
+  //   window.location.href = "/";
+
+  // }
+
+  useEffect(() => {
+    const user = localStorage.getItem("credentials");
+    if (!user) {
+      localStorage.getItem("credentials");
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/");
+      }, 2000);
+    } else {
+      setLoading(false);
+    }
+  }, []);
   return (
     <>
-      <UserDetailsPage />
+      {loading ? (
+        <div className="d-flex justify-content-center align-item-center mt-2 ">
+          <ClipLoader color={"#0000FF "} loading={loading} size={50} />
+        </div>
+      ) : (
+        <UserDetailsPage />
+      )}
     </>
   );
 };

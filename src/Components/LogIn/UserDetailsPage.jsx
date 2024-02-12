@@ -7,11 +7,13 @@ const UserDetailsPage = () => {
 
   const user = location.state;
   if(!user){
-    // navigate('/');
-    return null;
+    
+    navigate('/');
+    // return null;
   }
   // console.log(user);
   const handleReset = () => {
+    localStorage.removeItem("credentials")
     navigate("/");
   };
 
@@ -20,34 +22,34 @@ const UserDetailsPage = () => {
       <h1>LogIn User Details</h1>
       <div>
         <strong>I'd: </strong>
-        {user.id}
+        {user?.id}
       </div>
       <div>
         <strong>First Name: </strong>
-        {user.firstName}
+        {user?.firstName}
       </div>
       <div>
         <strong>Last Name: </strong>
-        {user.lastName}
+        {user?.lastName}
       </div>
       <div>
         <strong>Email: </strong>
-        {user.email}
+        {user?.email}
       </div>
       <div>
         <strong>Phone: </strong>
-        {user.phoneNumber}
+        {user?.phoneNumber}
       </div>
       <div>
         <strong>Password: </strong>
-        {user.password}
+        {user?.password}
       </div>
       <button
         type="button"
-        className="btn btn-sm btn-success btn-lg"
+        className="btn btn-sm btn-danger btn-lg"
         onClick={handleReset}
       >
-        Back
+        Log-Out
       </button>
     </div>
   );
