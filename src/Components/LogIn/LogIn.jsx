@@ -50,6 +50,7 @@ const LogIn = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+    
     // console.log(values);
   };
 const handleRememberMeChange =()=>{
@@ -58,6 +59,7 @@ const handleRememberMeChange =()=>{
     localStorage.setItem('credentials',JSON.stringify(values));
   }else{
     localStorage.removeItem('credentials')
+    setValues(initialValues)
   }
 
 }
@@ -71,20 +73,21 @@ const handleRememberMeChange =()=>{
     if (Object.keys(errors).length === 0) {
       const user=LoginData.find(user=>user.email === values.email && user.password === values.password)
       if (user){
+        localStorage.setItem('loggedInUser',JSON.stringify(user))
         localStorage.setItem('credentials',JSON.stringify(values));
         if(!rememberMe){
           localStorage.setItem('credentials',JSON.stringify(values));
         }
         toast.success("Login save successfully",{
-          position:"top-center",
+          position:"top-right",
           autoClose:3000,
-        
+          onClose:()=> navigate('/user-details',{state:user})
         });
-        navigate('/user-details',{state:user})
-    console.log(user)
+       
+    // console.log(user)
       }else{
         toast.error("Invalid email or password",{
-          position:"top-center",
+          position:"top-right",
           autoClose:3000
         })
       }
@@ -194,9 +197,7 @@ const handleRememberMeChange =()=>{
                           <span className={Style.eyeicon} onClick={togglePasswordVisibility}>
                             {showPassword ? <FaEye /> :  <FaEyeSlash />}
                           </span>
-                         
-                         
-                         
+
                         </div>
                         <p className={Style.error}>{errors.password}</p>
                         <div className="form-check">
@@ -222,8 +223,8 @@ const handleRememberMeChange =()=>{
 
                         {/* <a className="small text-muted" href="#!">
                           Forgot password?
-                        </a> */}
-                        {/* <p
+                        </a>
+                        <p
                           className="mb-5 pb-lg-2"style={{ color: "#393f81" }}>
                           Don't have an account?{" "}
                           <a href="#!" style={{ color: "#393f81" }}> Register here </a>

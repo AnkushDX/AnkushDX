@@ -1,19 +1,19 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const UserDetailsPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const user = location.state;
-  if(!user){
-    
-    navigate('/');
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  // const user = location.state;
+  if (!user) {
+    navigate("/");
+
     // return null;
   }
   // console.log(user);
   const handleReset = () => {
-    localStorage.removeItem("credentials")
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("credentials");
     navigate("/");
   };
 
