@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from "react";
 import Header from "../Header/Header";
 import Style from "../LogIn/LogIn.module.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast,Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import LoginData from './Logindata.json'
 import { useNavigate } from "react-router-dom";
+// import {Slide} from 'react-toastify'
 
 
 
@@ -20,7 +21,7 @@ const LogIn = () => {
   const [errors, setErrors] = useState({});
   const [isSubmit, setSubmit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
  
   useEffect(() => {
     const storedCredentials = localStorage.getItem('credentials');
@@ -29,9 +30,9 @@ const LogIn = () => {
     }else{
       const { email, password } = JSON.parse(storedCredentials);
       setValues({ email, password });
-      setRememberMe(true);
+      // setRememberMe(true);
     }
-  }, []);
+  }, [ navigate]);
 
   // useEffect(()=>{
   //   const storedCredentials = localStorage.getItem('credentials');
@@ -53,48 +54,53 @@ const LogIn = () => {
     
     // console.log(values);
   };
-const handleRememberMeChange =()=>{
-  setRememberMe(!rememberMe)
-  if(!rememberMe){
-    localStorage.setItem('credentials',JSON.stringify(values));
-  }else{
-    localStorage.removeItem('credentials')
-    setValues(initialValues)
-  }
+// const handleRememberMeChange =()=>{
+//   // setRememberMe(!rememberMe)
+//   // if(!rememberMe){
+//   //   localStorage.setItem('object',JSON.stringify(values));
+//   // }else{
+//   //   localStorage.removeItem('object')
+//   //   setValues(initialValues)
+//   // }
 
-}
- 
+// }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate(values);
     setErrors(errors);
     setSubmit(true);
+    
 
     if (Object.keys(errors).length === 0) {
       const user=LoginData.find(user=>user.email === values.email && user.password === values.password)
       if (user){
         localStorage.setItem('loggedInUser',JSON.stringify(user))
         localStorage.setItem('credentials',JSON.stringify(values));
-        if(!rememberMe){
-          localStorage.setItem('credentials',JSON.stringify(values));
-        }
-        toast.success("Login save successfully",{
-          position:"top-right",
-          autoClose:3000,
-          onClose:()=> navigate('/user-details',{state:user})
-        });
-       
+
+        // if(!rememberMe){
+        //   // localStorage.setItem('credentials',JSON.stringify(values));
+        // }
+        setTimeout(() => {
+          toast.success("Login save successfully",{
+            position:"top-right",
+            autoClose:1500,
+            transition: Slide, 
+          });
+        }, 100);
+           navigate('/user-details',{state:user})
     // console.log(user)
       }else{
         toast.error("Invalid email or password",{
           position:"top-right",
-          autoClose:3000
+          transition: Slide,
+          autoClose:1500
         })
       }
-      let errorMessage = "";
-      Object.keys(errors).forEach((key) => {
-        errorMessage += `${errors[key]}\n`;
-      });
+      // let errorMessage = "";
+      // Object.keys(errors).forEach((key) => {
+      //   errorMessage += `${errors[key]}\n`;
+      // });
     }
   
   };
@@ -102,8 +108,7 @@ const handleRememberMeChange =()=>{
   const validate = (values) => {
     const errors = {};
     const emailRegexExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const passwordRegExp =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/;
+    // const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/;
 
     //  -------------email----------------
     if (!values.email) {
@@ -202,8 +207,8 @@ const handleRememberMeChange =()=>{
                         <p className={Style.error}>{errors.password}</p>
                         <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="rememberMeCheckBox"
-                        checked={rememberMe}
-                        onChange={handleRememberMeChange}
+                        // checked={rememberMe}
+                        // onChange={handleRememberMeChange}
                         
                          />
   

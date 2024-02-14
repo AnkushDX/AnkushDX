@@ -1,10 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
+
 const UserDetailsPage = () => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
   // const user = location.state;
+  // 
   if (!user) {
     navigate("/");
 
@@ -51,7 +55,7 @@ const UserDetailsPage = () => {
       >
         Log-Out
       </button>
-    </div>
+      <ToastContainer/>    </div>
   );
 };
 
