@@ -28,7 +28,7 @@ const Protected = () => {
     <>
       {loading ? (
         <div className="d-flex justify-content-center align-item-center mt-2 ">
-          <ClipLoader color={"#0000FF "} loading={loading} size={50} />
+          <ClipLoader color={"#0000FF "} loading={loading} size={30} />
         </div>
       ) : (
         <UserDetailsPage />

@@ -3,6 +3,11 @@
     "id": 1,
     "firstName": "Ankush",
     "lastName": "Panwar",
+    "age": 26,
+    "city":"Mohali",
+    "followers":"80k",
+    "like":"803k",
+    "photos":"2.5k",
     "email": "ankush07@gmail.com",
     "phoneNumber": "9728733043",
     "password": "Ankush@3343"
@@ -11,6 +16,8 @@
     "id": 2,
     "firstName": "Pankaj",
     "lastName": "Panwar",
+    "Age":26,
+    "city":"London",
     "email": "pankaj07@gmail.com",
     "phoneNumber": "9728733043",
     "password": "Pankaj@3343"
@@ -19,6 +26,8 @@
     "id": 3,
     "firstName": "Rahul",
     "lastName": "Panwar",
+    "Age":26,
+    "city":"London",
     "email": "rahul07@gmail.com",
     "phoneNumber": "9728733043",
     "password": "Rahul@3343"
@@ -27,6 +36,8 @@
     "id": 4,
     "firstName": "Suraj",
     "lastName": "Adiwal",
+    "age":26,
+    "city":"London",
     "email": "suraj07@gmail.com",
     "phoneNumber": "9728733043",
     "password": "Suraj@3343"
@@ -35,6 +46,8 @@
     "id": 5,
     "firstName": "Dinesh",
     "lastName": "Panwar",
+    "Age":26,
+    "city":"London",
     "email": "dinesh07@gmail.com",
     "phoneNumber": "9728733043",
     "password": "Dinesh@3343"

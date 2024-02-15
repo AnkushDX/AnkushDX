@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 import LoginData from './Logindata.json'
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+
 // import {Slide} from 'react-toastify'
 
 
@@ -15,24 +17,42 @@ const LogIn = () => {
   const initialValues = {
     email: "",
     password: "",
+    rememberMe:false
+    
   };
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmit, setSubmit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  // const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading,setLoading]=useState(false)
  
-  useEffect(() => {
-    const storedCredentials = localStorage.getItem('credentials');
-    if (!storedCredentials) {
-      navigate('/');
-    }else{
-      const { email, password } = JSON.parse(storedCredentials);
-      setValues({ email, password });
-      // setRememberMe(true);
+
+  useEffect(()=>{
+    const storedCredentials=localStorage.getItem('credentials')
+    if(storedCredentials){
+      const{email,password,rememberMe}=JSON.parse(storedCredentials);
+      if(rememberMe){
+        setValues({email,password,rememberMe:true});
+        setRememberMe(true);
+      }else {
+        setValues({email:"",password:""});
+        setRememberMe(false)
+      }
     }
-  }, [ navigate]);
+
+  },[])
+  // useEffect(() => {
+  //   const storedCredentials = localStorage.getItem('credentials');
+  //   if (!storedCredentials) {
+  //     navigate('/');
+  //   }else{
+  //     const { email, password } = JSON.parse(storedCredentials);
+  //     setValues({ email:"", password:"", });
+  //     setRememberMe(false);
+  //   }
+  // }, [ navigate]);
 
   // useEffect(()=>{
   //   const storedCredentials = localStorage.getItem('credentials');
@@ -49,22 +69,22 @@ const LogIn = () => {
     setShowPassword(!showPassword);
   }
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    const { name, value,checked } = e.target;
+    const newValue =name === "rememberMe" ?checked:value;
+    setValues({ ...values, [name]: newValue });
     
     // console.log(values);
   };
 // const handleRememberMeChange =()=>{
-//   // setRememberMe(!rememberMe)
+//   setRememberMe(!rememberMe)
 //   // if(!rememberMe){
 //   //   localStorage.setItem('object',JSON.stringify(values));
 //   // }else{
 //   //   localStorage.removeItem('object')
 //   //   setValues(initialValues)
 //   // }
-
 // }
-
+// isSubmit('')
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate(values);
@@ -75,20 +95,30 @@ const LogIn = () => {
     if (Object.keys(errors).length === 0) {
       const user=LoginData.find(user=>user.email === values.email && user.password === values.password)
       if (user){
+        setLoading(true)
         localStorage.setItem('loggedInUser',JSON.stringify(user))
         localStorage.setItem('credentials',JSON.stringify(values));
+        if(values.rememberMe){
+          localStorage.setItem('credentials',JSON.stringify({email:values.email,password:values.password,rememberMe:true}))
+        }else{
+          localStorage.removeItem('credentiala')
+        }
+        // localStorage.setItem('credentials',JSON.stringify(values));
 
         // if(!rememberMe){
-        //   // localStorage.setItem('credentials',JSON.stringify(values));
+        //   localStorage.setItem('credentials',JSON.stringify(values));
         // }
         setTimeout(() => {
           toast.success("Login save successfully",{
             position:"top-right",
-            autoClose:1500,
+            autoClose:1000,
             transition: Slide, 
           });
+        }, 400);
+        setTimeout(() => {
+          navigate('/user-details',{state:user})
         }, 100);
-           navigate('/user-details',{state:user})
+      
     // console.log(user)
       }else{
         toast.error("Invalid email or password",{
@@ -138,6 +168,15 @@ const LogIn = () => {
 
     return errors;
   };
+  useEffect (()=>{
+    const storedCredentials= localStorage.getItem('loggedInUser');
+    if (storedCredentials && !isSubmit){
+      const {email,password}=JSON.parse(storedCredentials);
+      if(email && password){
+        navigate('/user-details')
+      }
+    }
+  },[navigate,isSubmit])
  
   return (
     <>
@@ -207,11 +246,11 @@ const LogIn = () => {
                         <p className={Style.error}>{errors.password}</p>
                         <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="rememberMeCheckBox"
-                        // checked={rememberMe}
+                        name="rememberMe"
+                        checked={values.rememberMe}
+                        onChange={handleChange}
                         // onChange={handleRememberMeChange}
-                        
                          />
-  
                         <label className="form-check-label" htmlFor="rememberMeCheckBox">
                         Remember me
                      </label>
