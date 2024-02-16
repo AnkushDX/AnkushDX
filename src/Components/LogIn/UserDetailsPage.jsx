@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
-import './UserDetails.css'
-
+import Style from "../LogIn/UserDetails.module.css";
 
 const UserDetailsPage = () => {
   const navigate = useNavigate();
@@ -20,97 +19,85 @@ const UserDetailsPage = () => {
       },600)
     }
   },[user,navigate])
-  // if (!user) {
-  //   navigate("/");
-    
-  //   // return null;
-  // }
+ 
   // console.log(user);
   const handleReset = () => {
     localStorage.removeItem("loggedInUser");
     // localStorage.removeItem("credentials");
     navigate("/");
   };
+  // const labelvalue = (lable,value)=>{
+  //   return (
+  //     value === null ?(
+  //     <div>
+  //       <span>{lable}: </span>
+  //       <span>null</span>
+  //     </div>
+  //   ):(
+  //   <div>{value}</div>
+  //   )
+  //   )
+  // };
+   const labelvalue =(lable,value)=>{
+    return(
+      <div>
+        <span>{lable}: </span>
+        <span>{value || "null"}</span>
+      </div>
+    )
 
+   }
   return (
-    <div className="text-center">
-      <h1>LogIn User Details</h1>
-      {loading ?
-      ClipLoader(
-        <div className="d-flex justify-content-center align-item-center mt-2 ">
-          <ClipLoader color={"#0000FF"} loading={loading} size={30} />
-        </div>
-      ):(
-        <>
-        <div ClassName="container">
-        <div ClassName="card">
-            <div ClassName="card-header"></div>
-            <div ClassName="card-body">
-                <div ClassName="inner">
-                    <div style={{fontSize: "18px",letterSpacing: ".5px",marginBottom: "10px"}}>{user?.firstName}<span ClassName="color__gray" style={{marginLeft: "10px"}}>26</span></div>
-                    <div ClassName="color__gray" style={{fontSize: "13px", letterSpacing: ".5px"}}>{user?.city}</div>
+    <>
+      <div className={Style.main}>
+        <img src="./Images/bg-pattern-top.svg" className={Style.bg1} alt="" />
+        {loading ? (
+          <div className="d-flex justify-content-center align-item-center mt-2">
+            <ClipLoader color={"#0000FF"} loading={loading} size={30} />
+          </div>
+        ) : (
+          <div className={Style.container}>
+            <div className={Style.card}>
+              <div className={Style.cardHeader}></div>
+              <div className={Style.cardBody}>
+                <div className={Style.inner} style={{ marginTop: "", textAlign: "center" }}>
+              <div>
+                <img className={Style.Dp} src={`/Images/${user?.profile}`} alt=""/>
+              </div>
+                  <div style={{ fontSize: "14px", letterSpacing: ".5px", marginTop:"-35px",fontWeight:"bold", marginBottom: "10px" }}>
+                    {labelvalue("First Name ",user?.firstName )}<span className="color__gray" style={{ marginLeft: "10px",marginTop:"-10px" }}>{labelvalue("Last Name ",user?.lastName )}</span>
+                    <span className="color__gray" style={{ marginLeft: "10px",marginTop:"-10px" }}>{labelvalue("Age ",user?.age )}</span>
+                  </div>
+                  <div className="color__gray" style={{ fontSize: "13px",marginTop:"10px",fontWeight:"bold", letterSpacing: ".5px" }}>{labelvalue("City ",user?.city )}</div>
                 </div>
+              </div>
+              <div className={Style.cardFooter}>
+                <div className={Style.inner2}>
+                  <div>{user?.followers ||"0"}</div>
+                  <div className="color__gray">Followers</div>
+                </div>
+                <div className={Style.inner2}>
+                  <div>{user?.like || "0"}</div>
+                  <div className="color__gray">Likes</div>
+                </div>
+                <div className={Style.inner2}>
+                  <div >{user?.photos || "0"}</div>
+                  <div className="color__gray">Photos</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                className={`btn btn-sm btn-danger btn-lg ${Style.outBtn}`}
+                onClick={handleReset}
+              >
+                Log-Out
+              </button>
             </div>
-            <div ClassName="card-footer">
-                <div ClassName="inner">
-                    <div>{user?.followers}</div>
-                    <div ClassName="color__gray">Followers</div>
-                </div>
-                <div ClassName="inner">
-                    <div>{user?.like}</div>
-                    <div ClassName="color__gray">Likes</div>
-                </div>
-                <div ClassName="inner">
-                    <div>{user?.photos}</div>
-                    <div ClassName="color__gray">Photos</div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <div>
-        <strong>I'd: </strong>
-        {user?.id}
+          </div>
+        )}
+        <ToastContainer />
       </div>
-      <div>
-        <strong>First Name: </strong>
-        {user?.firstName}
-      </div>
-      <div>
-        <strong>Last Name: </strong>
-        {user?.lastName}
-      </div>
-      <div>
-        <strong>Age: </strong>
-        {user?.age}
-      </div>
-      <div>
-        <strong>City: </strong>
-        {user?.city}
-      </div>
-      <div>
-        <strong>Email: </strong>
-        {user?.email}
-      </div>
-      <div>
-        <strong>Phone: </strong>
-        {user?.phoneNumber}
-      </div>
-      <div>
-        <strong>Password: </strong>
-        {user?.password}
-      </div>
-      <button
-        type="button"
-        className="btn btn-sm btn-danger btn-lg"
-        onClick={handleReset}
-      >
-        Log-Out
-      </button>
-        </>
-      )}
-
-      <ToastContainer/>    </div>
+    </>
   );
-};
-
-export default UserDetailsPage;
+        }
+  export default UserDetailsPage;

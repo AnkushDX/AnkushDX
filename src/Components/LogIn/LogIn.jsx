@@ -75,16 +75,7 @@ const LogIn = () => {
     
     // console.log(values);
   };
-// const handleRememberMeChange =()=>{
-//   setRememberMe(!rememberMe)
-//   // if(!rememberMe){
-//   //   localStorage.setItem('object',JSON.stringify(values));
-//   // }else{
-//   //   localStorage.removeItem('object')
-//   //   setValues(initialValues)
-//   // }
-// }
-// isSubmit('')
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate(values);
@@ -103,11 +94,7 @@ const LogIn = () => {
         }else{
           localStorage.removeItem('credentiala')
         }
-        // localStorage.setItem('credentials',JSON.stringify(values));
-
-        // if(!rememberMe){
-        //   localStorage.setItem('credentials',JSON.stringify(values));
-        // }
+    
         setTimeout(() => {
           toast.success("Login save successfully",{
             position:"top-right",

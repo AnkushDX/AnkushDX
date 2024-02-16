@@ -1,0 +1,113 @@
+.main{
+    background: #1a9eab;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.bg1{
+overflow: hidden;
+height: 640px;
+position: absolute;
+}
+.container{
+    width: 310px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    z-index: 2;
+    overflow: hidden;
+}
+.card{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.cardHeader{
+    background: url(https://rvs-profile-card-component-main.netlify.app/images/bg-pattern-card.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50%;
+}
+.cardBody{
+    height: 70%;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #000000;
+}
+.cardBody::before{
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    background: white;
+    transform: translate(-50%, 0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.inner{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 50px; */
+}
+/* .inner::after{
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 50%;
+  
+    transform: translate(-50%, 0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+} */
+.cardFooter{
+    height: 20%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.inner2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.outBtn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 30%;
+    margin-left: 110px;
+}
+.Dp{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 4px solid #1a9fab33;
+    margin-top: -155px;
+}
+.fname{
+    margin-top: -35px;
+}
+.lname{
+    margin-top: -35px;
+
+}

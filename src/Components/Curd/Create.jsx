@@ -49,7 +49,7 @@ const handleSubmit=(event)=>{
 const sendDataToJson=(formData)=>{
 
   data.push(formData);
-  navigate('/')
+  navigate('/curd')
   alert("Data submitied successfully...",formData)
 }
   return (
